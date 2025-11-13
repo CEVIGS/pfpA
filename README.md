@@ -1,6 +1,6 @@
-# pfp-automation
+# pfpA
 
-[![pfp](https://github.com/BigPotatoPizzaHey/pfp-automation/actions/workflows/pfp.yml/badge.svg)](https://github.com/BigPotatoPizzaHey/pfp-automation/actions/workflows/pfp.yml)
+[![pfp](https://github.com/CEVIGS/pfpA/actions/workflows/pfp.yml/badge.svg)](https://github.com/CEVIGS/pfpA/actions/workflows/pfp.yml)
 
 The CEVIGS pfp-automation tools allows you to automatically set your profile picture every day to counter the force of the default KEGS pfp.
 
