@@ -1,0 +1,36 @@
+name: pfp
+on:
+  workflow_dispatch:
+  # push:
+  schedule:
+    - cron: "15 1 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  pfp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5.0.0
+      - name: setup python
+        uses: actions/setup-python@v6.0.0
+
+      - name: install deps
+        run: |
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+      - name: run pfp scripts
+        env:
+          KEGSCRAPER_USERNAME: ${{ secrets.KEGSCRAPER_USERNAME }}
+          KEGSCRAPER_SECRET: ${{ secrets.KEGSCRAPER_SECRET }}
+        run: |
+          python main.py
+
+      - name: Save results
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'ci: result'
+          default_author: github_actions
+          add: 'results result.jpg --ignore-errors'
