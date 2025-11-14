@@ -49,9 +49,9 @@ This works by downloading the chrome browser and opening it every morning automa
 
 <img width="942" height="519" alt="image" src="https://github.com/user-attachments/assets/92f4da2b-6ad1-40b8-8b25-40fba5011256" />
 
-13. It will take about 3-5 minutes. When it's done, it should give a green checkmark as the status (you may need to reload the page)
+13. It will take about 3-5 minutes. When it's done, it should give a green checkmark as the status (you may need to reload the page) - note that this does not necessarily mean that the pfp change has actually been successful.
 
-14. To view logs as it is working ... TOOD
+14. To view check it has actually worked, open the result.jpg file and make sure it shows the myaccount.microsoft.com webpage with the new pfp.
 
 
 Put your pfp images in the `pfps/` directory and one will be randomly picked each day.
