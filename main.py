@@ -26,11 +26,15 @@ def main():
     """
     The main script which sets your pfp. This is run by the GitHub action every day.
     """
+    # if no secret value is set, github sets it to an empty string
+    # we are also using getenv for some unrequired ones for local testing purposes.
     username = os.environ["KEGSCRAPER_USERNAME"]
     password = os.environ["KEGSCRAPER_SECRET"]
-    save_results = os.getenv("SAVE_RESULTS", "no") == "yes"
-    save_final_result = os.getenv("SAVE_FINAL_RESULT", "yes") == "yes"
+    save_results = os.getenv("SAVE_RESULTS", "") == "yes"
+    save_final_result = os.getenv("SAVE_FINAL_RESULT", "") in ("yes", "")
     
+    assert username and password, "need authentication!"
+
     print(f"""\
 ## Settings
 {save_results=}
