@@ -6,6 +6,10 @@ The CEVIGS pfp-automation tools allows you to automatically set your profile pic
 
 This works by downloading the chrome browser and opening it every morning automatically on the github server.
 
+This means that the code does **not run on your device** and will run **automatically, even if your device(s) are off**.
+
+Use at your own risk!
+
 ## [tutorial](https://github.com/CEVIGS/pfpA/wiki/Set-up)
 
 ###### pfpA is powered by the [pfpautomation library](https://github.com/CEVIGS/pfpautomation) and [kegscraper](https://github.com/BigPotatoPizzaHey/kegscraper)
