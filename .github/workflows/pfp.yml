@@ -26,9 +26,6 @@ jobs:
         env:
           KEGSCRAPER_USERNAME: ${{ secrets.USER }}
           KEGSCRAPER_SECRET: ${{ secrets.PASS }}
-          # Note that results/ and result.jpg WILL be overwritten/deleted every run
-          SAVE_FINAL_RESULT: ${{ secrets.SAVE_FINAL_RESULT }}
-          SAVE_RESULTS: ${{ secrets.SAVE_RESULTS }}
         run: |
           python main.py
 
