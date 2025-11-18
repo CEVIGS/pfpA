@@ -3,5 +3,5 @@
 # It is also possible (but not recommended) to set inputs to the browser constructur here.
 #
 # Do not add your email/password here. You need to do that in the github secrets page.
-save_results = true
+save_results = false
 save_final_result = true
