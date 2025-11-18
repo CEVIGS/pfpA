@@ -1,12 +1,9 @@
-import plw as ms
 import os
 import random
 from pathlib import Path
+from pprint import pprint
+from cevigspfpautomation import plw as ms
 
-# Implement custom configuration here
-# Note that results/ and result.jpg WILL be overwritten/deleted every run
-SAVE_RESULTS = False
-SAVE_FINAL_RESULT = True
 
 def choose_pfp(pfps: list[str]) -> str:
     """
@@ -30,19 +27,28 @@ def main():
     The main script which sets your pfp. This is run by the GitHub action every day.
     """
     username = os.environ["KEGSCRAPER_USERNAME"]
-    secret = os.environ["KEGSCRAPER_SECRET"]
+    password = os.environ["KEGSCRAPER_SECRET"]
+    save_results = os.getenv("SAVE_RESULTS", "no") == "yes"
+    save_final_result = os.getenv("SAVE_FINAL_RESULT", "yes") == "yes"
+    
+    print(f"""\
+## Settings
+{save_results=}
+{save_final_result=}
+""")
 
-    pfp_dir = Path(__file__).parent / "pfps"
+    pfp_dir = Path.cwd() / "pfps" # not sure if this is equivalent to Path("pfps")
     pfps = next(pfp_dir.walk())[2]  # root, dirs, files (we choose files)
 
-    print(f"Found {pfps=}")
+    print("## Pfp list:")
+    pprint(pfps)
     pfp: Path = (pfp_dir / choose_pfp(pfps)).resolve()
-    assert pfp.exists(), f"Invalid pfp {pfp!r}"
+    assert pfp.exists(), f"Invalid pfp {pfp!r}.\nThis is a problem with the choose_pfp() function - that you presumably edited - NOT pfpautomation itself."
     print(f"Chose {pfp=}")
 
-    ms.set_pfp(username, secret, str(pfp),
-               save_results=SAVE_RESULTS,
-               save_final_result=SAVE_FINAL_RESULT)
+    ms.set_pfp(username, password, str(pfp),
+               save_results=save_results,
+               save_final_result=save_final_result)
 
 
 if __name__ == '__main__':

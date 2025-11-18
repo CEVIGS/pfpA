@@ -19,12 +19,16 @@ jobs:
 
       - name: install deps
         run: |
+          pip install git+https://github.com/CEVIGS/pfpautomation.git
           pip install -r requirements.txt
           playwright install --with-deps chromium
       - name: run pfp scripts
         env:
-          KEGSCRAPER_USERNAME: ${{ secrets.KEGSCRAPER_USERNAME }}
-          KEGSCRAPER_SECRET: ${{ secrets.KEGSCRAPER_SECRET }}
+          KEGSCRAPER_USERNAME: ${{ secrets.USER }}
+          KEGSCRAPER_SECRET: ${{ secrets.PASS }}
+          # Note that results/ and result.jpg WILL be overwritten/deleted every run
+          SAVE_FINAL_RESULT: ${{ secrets.SAVE_FINAL_RESULT }}
+          SAVE_RESULTS: ${{ secrets.SAVE_RESULTS }}
         run: |
           python main.py
 
