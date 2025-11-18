@@ -1,7 +1,8 @@
 import os
 import random
+import tomllib
 from pathlib import Path
-from pprint import pprint
+from pprint import pprint, pformat
 from cevigspfpautomation import plw as ms
 
 
@@ -26,22 +27,25 @@ def main():
     """
     The main script which sets your pfp. This is run by the GitHub action every day.
     """
+    with open("config.toml", "rb") as f:
+        config = tomllib.load(f)
+
+    assert "email" not in config, "Don't use config.toml for email! Use github secrets instead!" 
+    assert "password" not in config, "Don't use config.toml for password! Use github secrets instead!"
+
     # if no secret value is set, github sets it to an empty string
     # we are also using getenv for some unrequired ones for local testing purposes.
     username = os.environ["KEGSCRAPER_USERNAME"]
     password = os.environ["KEGSCRAPER_SECRET"]
-    save_results = os.getenv("SAVE_RESULTS", "") == "yes"
-    save_final_result = os.getenv("SAVE_FINAL_RESULT", "") in ("yes", "")
     
     assert username and password, "need authentication!"
 
     print(f"""\
-## Settings
-{save_results=}
-{save_final_result=}
+## Settings (passed as **kwargs to set_pfp)
+{pformat(config)}
 """)
 
-    pfp_dir = Path.cwd() / "pfps" # not sure if this is equivalent to Path("pfps")
+    pfp_dir = Path("pfps")
     pfps = next(pfp_dir.walk())[2]  # root, dirs, files (we choose files)
 
     print("## Pfp list:")
@@ -50,9 +54,7 @@ def main():
     assert pfp.exists(), f"Invalid pfp {pfp!r}.\nThis is a problem with the choose_pfp() function - that you presumably edited - NOT pfpautomation itself."
     print(f"Chose {pfp=}")
 
-    ms.set_pfp(username, password, str(pfp),
-               save_results=save_results,
-               save_final_result=save_final_result)
+    ms.set_pfp(username, password, str(pfp), **config)
 
 
 if __name__ == '__main__':
