@@ -5,3 +5,8 @@
 # Do not add your email/password here. You need to do that in the github secrets page.
 save_results = false
 save_final_result = true
+
+# do not enable this unless you know what you're doing. It will break on github actions because gh actions doesn't have a gui window
+# or at least i think that's why
+#
+# headless=false

@@ -4,7 +4,9 @@ import tomllib
 from pathlib import Path
 from pprint import pprint, pformat
 from cevigspfpautomation import plw as ms
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def choose_pfp(pfps: list[str]) -> str:
     """
